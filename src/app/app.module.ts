@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
+import { FormsModule }   from '@angular/forms';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
@@ -21,6 +22,7 @@ import { MapsComponent }   from './maps/maps.component';
 import { NotificationsComponent }   from './notifications/notifications.component';
 import { UpgradeComponent }   from './upgrade/upgrade.component';
 import { CreateIssueComponent } from './create-issue/create-issue.component';
+import { SyncordService } from './services/syncord-service.service';
 
 
 
@@ -44,11 +46,12 @@ import { CreateIssueComponent } from './create-issue/create-issue.component';
     NavbarModule,
     FooterModule,
     FixedPluginModule,
-    HttpModule
+    HttpModule,
+    FormsModule
     //NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
 
   ],
-  providers: [],
+  providers: [SyncordService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

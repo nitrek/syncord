@@ -6,29 +6,35 @@
           <h4 class="title">Issue Details</h4>
         </div>
         <div class="content">
-          <form>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Issuer</label>
-                  <input type="text" class="form-control border-input" placeholder="Issuer" value="">
-                </div>
-              </div>
-            </div>
+          <form #createIssueForm="ngForm">
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Deal Name</label>
-                  <input type="text" class="form-control border-input" placeholder="Deal Name" value="Creative Code Inc.">
+                  <input type="text" class="form-control border-input" placeholder="Deal Name" 
+                         name="dealNameTxt"
+                         [(ngModel)]="dealName">
                 </div>
               </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Issuer</label>
+                    <input type="text" class="form-control border-input" placeholder="Issuer" 
+                           name="issuerTxt"
+                           [(ngModel)]="issuer">
+                  </div>
+                </div>
+              </div>
 
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Issue Size</label>
-                  <input type="text" class="form-control border-input" placeholder="Issue Size" value="Melbourne, Australia">
+                  <input type="text" class="form-control border-input" placeholder="Issue Size" 
+                         name="issueSizeTxt"
+                        [(ngModel)]="issueSize">
                 </div>
               </div>
             </div>
@@ -65,7 +71,9 @@
 
            
             <div class="text-center">
-              <button type="submit" class="btn btn-info btn-fill btn-wd">Create Issue</button>
+              <button type="submit" class="btn btn-info btn-fill btn-wd" 
+                      [disabled]="!isCreateEnabled()"
+                      (click)="createIssue()">Create Issue</button>
             </div>
             <div class="clearfix"></div>
           </form>

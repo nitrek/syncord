@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+import { SyncordService } from '../services/syncord-service.service'
 
 @Component({
   selector: 'app-create-issue',
@@ -8,28 +9,27 @@ import { Http } from '@angular/http';
 })
 export class CreateIssueComponent implements OnInit {
 
-  constructor(private http:Http) { }
+  constructor(private http:Http, private service:SyncordService) { }
 
   peerBanksList;
-  selectedBanksList = new Array();;
+  selectedBanksList = new Array();
+
+  dealName: string;
+  issuer: string;
+  issueSize:number;
 
   ngOnInit() {
     this.getBankList();
   }
 
   getBankList() {
-    const url = 'http://abcipl.club:10013/api/obligation/peers';
+    const url = this.service.GET_PEERS_URL;
 
     this.http.get(url).subscribe(
       (response) => {
         let responseText = response.json();
-
         this.peerBanksList = responseText.peers;
-        console.log('Peers List ', this.peerBanksList);
-
-        // for (let user of responseText) {
-        //   this.userNameMap.set(user.key.toLowerCase(), user.name);
-        // }
+        //console.log('Peers List ', this.peerBanksList);
       },
       (error) => {
         console.log("Error in getting users list : " + error);
@@ -51,5 +51,30 @@ export class CreateIssueComponent implements OnInit {
   removeBank(bankName) {
     this.peerBanksList.push(bankName);
     this.selectedBanksList.splice(this.selectedBanksList.indexOf(bankName), 1);
+  }
+
+  isCreateEnabled() {
+    return !!this.issuer && !!this.dealName && !!this.issueSize && this.selectedBanksList.length > 0;
+  }
+
+  createIssue() {
+    const url = this.service.CREATE_ISSUE_URL;
+    const parsedUrl = url + 
+                      "?issueName=" + this.dealName +
+                      "&issueSize=" + this.issueSize + 
+                      "&party=" + this.selectedBanksList[0];
+
+    this.http.get(parsedUrl).subscribe(
+      (response) => {
+        console.log('Create issue status : ' + response);
+      },
+      (error) => {
+        console.log("Error in creating issue : " + error);
+      },
+      () => {
+        //this.getLeaderBoardData();
+        //this.getMatchInfo();
+      }
+    )
   }
 }
