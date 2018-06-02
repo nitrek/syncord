@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { HttpModule } from '@angular/http';
+
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 import { SidebarModule } from './sidebar/sidebar.module';
@@ -19,6 +21,8 @@ import { MapsComponent }   from './maps/maps.component';
 import { NotificationsComponent }   from './notifications/notifications.component';
 import { UpgradeComponent }   from './upgrade/upgrade.component';
 import { CreateIssueComponent } from './create-issue/create-issue.component';
+
+
 
 @NgModule({
   declarations: [
@@ -39,7 +43,8 @@ import { CreateIssueComponent } from './create-issue/create-issue.component';
     SidebarModule,
     NavbarModule,
     FooterModule,
-    FixedPluginModule
+    FixedPluginModule,
+    HttpModule
     //NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
 
   ],

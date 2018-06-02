@@ -39,59 +39,22 @@
             <div class="table-responsive">
               <table class="table">
                 <tbody>
-                  <tr>
-                    <td class="text-center">
-                      1
-                    </td>
-                    <td>
-                      Citi Bank
-                    </td>
-                    <td>
-                      Book Runner
-                    </td>
-                    <td class="text-right">
-                        <button class="btn btn-sm btn-danger btn-icon">
-                            <i class="fa fa-remove"></i>
-                          </button>
-                    </td>
+                  <tr *ngFor="let coBanker of selectedBanksList; let i = index">
+                      <td class="text-center">
+                          {{i + 1}}
+                        </td>
+                        <td>
+                          {{coBanker}}
+                        </td>
+                        <td>
+                          Book Runner
+                        </td>
+                        <td class="text-right">
+                            <button class="btn btn-sm btn-danger btn-icon" (click)="removeBank(coBanker)">
+                                <i class="fa fa-remove"></i>
+                              </button>
+                        </td>
                   </tr>
-                  <tr>
-                    <td class="text-center">
-                      2
-                    </td>
-                    <td>
-                      John Doe
-                    </td>
-                    <td>
-                        Book Runner
-                    </td>
-                    
-                    <td class="text-right">
-                        <button class="btn btn-sm btn-danger btn-icon">
-                            <i class="fa fa-remove"></i>
-                          </button>
-                          
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-center">
-                      3
-                    </td>
-                    <td>
-                      Alex Mike
-                    </td>
-                    <td>
-                        Book Runner
-                    </td>
-                   
-                    <td class="text-right">
-                     
-                        <button class="btn btn-sm btn-danger btn-icon">
-                            <i class="fa fa-remove"></i>
-                          </button>
-                    </td>
-                  </tr>
-                
                 </tbody>
               </table>
             </div>
@@ -118,6 +81,31 @@
         </div>
         <div class="content">
           <ul class="list-unstyled team-members">
+            <div *ngFor="let bank of peerBanksList">
+              <li>
+                  <div class="row">
+                   <!-- <div class="col-xs-3">
+                      <div class="avatar">
+                        <img src="assets/img/faces/face-0.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                      </div>
+                    </div>-->
+                    <div class="col-xs-9">
+                        {{bank}}
+                      <br />
+                      <span class="text-muted">
+                        <small>Offline</small>
+                      </span>
+                    </div>
+    
+                    <div class="col-xs-3 text-right">
+                      <button class="btn btn-sm btn-success btn-icon" (click)="addBank(bank)">
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+            </div>
+            <!--
             <li>
               <div class="row">
                 <div class="col-xs-3">
@@ -126,7 +114,7 @@
                   </div>
                 </div>
                 <div class="col-xs-6">
-                  DJ Khaled
+                  Deutsche Bank
                   <br />
                   <span class="text-muted">
                     <small>Offline</small>
@@ -140,6 +128,7 @@
                 </div>
               </div>
             </li>
+          
             <li>
               <div class="row">
                 <div class="col-xs-3">
@@ -148,7 +137,7 @@
                   </div>
                 </div>
                 <div class="col-xs-6">
-                  Creative Tim
+                  RBS
                   <br />
                   <span class="text-success">
                     <small>Available</small>
@@ -170,7 +159,7 @@
                   </div>
                 </div>
                 <div class="col-xs-6">
-                  Flume
+                  ICICI Bank
                   <br />
                   <span class="text-danger">
                     <small>Busy</small>
@@ -184,6 +173,7 @@
                 </div>
               </div>
             </li>
+          -->
           </ul>
         </div>
       </div>
