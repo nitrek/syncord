@@ -2,6 +2,7 @@ import { Component, OnInit, Renderer, ViewChild, ElementRef } from '@angular/cor
 import { ROUTES } from '../../sidebar/sidebar.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { SyncordService } from './../../services/syncord-service.service';
 
 @Component({
     moduleId: module.id,
@@ -16,9 +17,12 @@ export class NavbarComponent implements OnInit{
     private toggleButton;
     private sidebarVisible: boolean;
 
+    userInfo: string;
+
     @ViewChild("navbar-cmp") button;
 
-    constructor(location:Location, private renderer : Renderer, private element : ElementRef) {
+    constructor(location:Location, private renderer : Renderer, private element : ElementRef, 
+                private service : SyncordService ) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -28,16 +32,23 @@ export class NavbarComponent implements OnInit{
         this.listTitles = ROUTES.filter(listTitle => listTitle);
         var navbar : HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
+        console.log(this.service.getUserName.toString())
+        this.userInfo = (this.service.getUserName() + ', ' + this.service.getCurrentBanker());
     }
     getTitle(){
         var titlee = window.location.pathname;
         titlee = titlee.substring(1);
+        console.log(titlee);
         for(var item = 0; item < this.listTitles.length; item++){
             if(this.listTitles[item].path === titlee){
                 return this.listTitles[item].title;
             }
         }
-        return 'Dashboard';
+        return 'Shared Orders';
+    }
+
+    getUserInfo() {
+        return this.service.getUserName + ', ' + this.service.getCurrentBanker;
     }
     sidebarToggle(){
         var toggleButton = this.toggleButton;

@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-9">
                         <div class="header">
-                            <h4 class="title">Issue List</h4>
+                            <h4 class="title">Orders</h4>
                             <p class="category">Here is a subtitle for this table</p>
                         </div>
                     </div>
@@ -24,22 +24,27 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                                <th>Deal Name</th>
+                                <th>Investor</th>
+                                <th>Investor Type</th>
+                                <th>Book</th>
+                                <th>Amount</th>
+                                <th>Allocated</th>
+                                <th>Share</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let row of issuesList" (click)="openOrders()">
-                                <td><a routerLink="/sharedorders">{{row.state.data.issueName}}</a></td>
-                                <td>{{row.state.data.issuer}}</td>
-                                <td class="text-right">{{row.state.data.issueSize}}</td>
-                                <td>{{row.state.data.coBanker}} </td>
-                                <td>{{row.state.data.borrower | x500ParserPipe | rolename:leadBanker}}</td>
-                                <td>{{row.state.data.paid}}</td>
+                            <tr *ngFor="let row of orderList">
+                                <td>{{row.dealName}}</td>
+                                <td>{{row.investor}}</td>
+                                <td>{{row.investorType}}</td>
+                                <td>{{row.book}}</td>
+                                <td>{{row.orderAmount}}</td>
+                                <td>{{row.allocatedAmount}}</td>
                                 <td>
-                                    <span *ngIf="row.state.data.status === 'DRAFT'">    <button type="submit" class="btn btn-info btn-fill " 
-                                        (click)="publishIssue(row)">Publish</button>
-                                    </span>
-                                </td>
+                                    <button type="submit" class="btn btn-info btn-fill " 
+                                    (click)="shareOrder(row)">Share</button>
+                                  </td>
                             </tr>
                         </tbody>
                     </table>

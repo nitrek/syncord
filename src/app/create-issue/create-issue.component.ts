@@ -62,6 +62,7 @@ export class CreateIssueComponent implements OnInit {
     const parsedUrl = url + 
                       "?issueName=" + this.dealName +
                       "&issueSize=" + this.issueSize + 
+                      "&issuer=" + this.issuer +
                       "&party=" + this.selectedBanksList[0];
 
     this.http.get(parsedUrl).subscribe(

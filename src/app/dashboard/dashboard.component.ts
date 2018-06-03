@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit{
   public tableData2: TableData;
 
   issuesList;
+  leadBanker;
 
   constructor(private http:Http, private service:SyncordService) { }
     ngOnInit(){
@@ -54,6 +55,7 @@ export class DashboardComponent implements OnInit{
         ]
     };
 
+    this.leadBanker = this.service.getCurrentBanker();
     this.getIssuesList();
     }
 
@@ -66,6 +68,8 @@ export class DashboardComponent implements OnInit{
           let responseText = response.json();
           this.issuesList = responseText;
           console.log('Issues List ', this.issuesList);
+
+          console.log('Banker ' + this.service.getMyRole(this.issuesList[1].state.data.coBanker));
         },
         (error) => {
           console.log("Error in getting users list : " + error);
@@ -75,5 +79,33 @@ export class DashboardComponent implements OnInit{
           //this.getMatchInfo();
         }
       )
+    }
+
+    publishIssue(issue) {
+      const url = this.service.PUBLISH_ISSUE_URL;
+
+      const parsedUrl = url + 
+                        "?id=" + issue.state.data.linearId.id +
+                        "&party=" + issue.state.data.coBanker;
+
+      console.log(parsedUrl);
+  
+      this.http.get(parsedUrl).subscribe(
+        (response) => {
+          console.log('Publish issue status : ' + response);
+          this.getIssuesList();
+        },
+        (error) => {
+          console.log("Error in creating issue : " + error);
+        },
+        () => {
+          //this.getLeaderBoardData();
+          //this.getMatchInfo();
+        }
+      )
+    }
+
+    openOrders() {
+      console.log('Clicked');
     }
 }

@@ -23,6 +23,10 @@ import { NotificationsComponent }   from './notifications/notifications.componen
 import { UpgradeComponent }   from './upgrade/upgrade.component';
 import { CreateIssueComponent } from './create-issue/create-issue.component';
 import { SyncordService } from './services/syncord-service.service';
+import { OrderBookComponent } from './order-book/order-book.component';
+import { X500ParserPipePipe } from './pipes/x500-parser-pipe.pipe';
+import { RolenamePipePipe } from './pipes/rolename-pipe.pipe';
+import { SharedOrdersComponent } from './shared-orders/shared-orders.component';
 
 
 
@@ -37,7 +41,11 @@ import { SyncordService } from './services/syncord-service.service';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    CreateIssueComponent
+    CreateIssueComponent,
+    OrderBookComponent,
+    X500ParserPipePipe,
+    RolenamePipePipe,
+    SharedOrdersComponent
   ],
   imports: [
     BrowserModule,
