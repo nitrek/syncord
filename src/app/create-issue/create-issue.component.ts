@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { SyncordService } from '../services/syncord-service.service'
 
+declare var $:any;
+
 @Component({
   selector: 'app-create-issue',
   templateUrl: './create-issue.component.html',
@@ -17,6 +19,8 @@ export class CreateIssueComponent implements OnInit {
   dealName: string;
   issuer: string;
   issueSize:number;
+
+  buttonClicked = false;
 
   ngOnInit() {
     this.getBankList();
@@ -54,10 +58,13 @@ export class CreateIssueComponent implements OnInit {
   }
 
   isCreateEnabled() {
-    return !!this.issuer && !!this.dealName && !!this.issueSize && this.selectedBanksList.length > 0;
+    return !!this.issuer && !!this.dealName && !!this.issueSize 
+            && this.selectedBanksList.length > 0 && !this.buttonClicked;
   }
 
   createIssue() {
+    this.buttonClicked = true;
+
     const url = this.service.CREATE_ISSUE_URL;
     const parsedUrl = url + 
                       "?issueName=" + this.dealName +
@@ -68,6 +75,8 @@ export class CreateIssueComponent implements OnInit {
     this.http.get(parsedUrl).subscribe(
       (response) => {
         console.log('Create issue status : ' + response);
+        this.showNotification('top', 'right');
+        this.buttonClicked = false;
       },
       (error) => {
         console.log("Error in creating issue : " + error);
@@ -78,4 +87,22 @@ export class CreateIssueComponent implements OnInit {
       }
     )
   }
+
+  showNotification(from, align){
+    var type = ['','info','success','warning','danger'];
+
+    var color = '#8EF3C5';//Math.floor((Math.random() * 4) + 1);
+
+  $.notify({
+      icon: "ti-save",
+      message: "Deal created successfully"
+    },{
+        type: type[color],
+        timer: 3000,
+        placement: {
+            from: from,
+            align: align
+        }
+    });
+}
 }
