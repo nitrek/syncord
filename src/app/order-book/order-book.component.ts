@@ -24,6 +24,8 @@ export class OrderBookComponent implements OnInit {
 
   orderList;
 
+  sharedOrderIds = new Map();
+
   constructor(private http:Http, private service:SyncordService) { }
     ngOnInit(){
        this.headerNames = [
@@ -64,7 +66,8 @@ export class OrderBookComponent implements OnInit {
     }
 
     getMyOrders() {
-      const url = '../../assets/data/myorders.json';
+      //const url = '../../assets/data/myorders.json';
+      const url = this.service.GET_MY_ORDERS;
   
       this.http.get(url).subscribe(
         (response) => {
@@ -113,12 +116,12 @@ export class OrderBookComponent implements OnInit {
       this.http.get(url).subscribe(
         (response) => {
           console.log('Orders ', response);
-          let issues = response.json();
+          let orders = response.json();
           
-          // for(let issue of issues) {
-          //   console.log(issue);
-          //   this.issuesIdMap.set(issue.state.data.issueName, issue.state.data.linearId.id)
-          // }
+          for(let order of orders) {
+            console.log(order);
+            this.sharedOrderIds.set(order.state.data.orderId, 'true');
+          }
           // console.log('Issues Map ', this.issuesIdMap);
         },
         (error) => {
@@ -130,34 +133,41 @@ export class OrderBookComponent implements OnInit {
         }
       )
     }
+    isOrderShared(orderId) {
+      if(!this.sharedOrderIds.get(orderId)) {
+        return false;
+      }
+      else {
+        return true;
+      }
+    }
 
     shareOrder(order) {
       const url = this.service.CREATE_ORDER;
 
       const parsedUrl = url + 
                         "?amount=" + order.orderAmount +
-                        "&party=" + 'HSBC' +
                         "&issueId=" + this.issuesIdMap.get(order.dealName) +
-                        "&issueName=" + order.dealName + 
                         "&investorName=" + order.investor +
                         "&book=" + order.book + 
-                        "&country=" + order.country;
+                        "&country=" + order.country +
+                        "&orderId=" + order.orderID;
 
       console.log(parsedUrl);
   
-      // this.http.get(parsedUrl).subscribe(
-      //   (response) => {
-      //     console.log('Publish issue status : ' + response);
-      //     this.getIssuesList();
-      //   },
-      //   (error) => {
-      //     console.log("Error in creating issue : " + error);
-      //   },
-      //   () => {
-      //     //this.getLeaderBoardData();
-      //     //this.getMatchInfo();
-      //   }
-      // )
+      this.http.get(parsedUrl).subscribe(
+        (response) => {
+          console.log('Share order status : ' + response);
+          this.getMyOrders();
+        },
+        (error) => {
+          console.log("Error in sharing ordere : " + error);
+        },
+        () => {
+          //this.getLeaderBoardData();
+          //this.getMatchInfo();
+        }
+      )
     }
     }
 

@@ -14,6 +14,7 @@ export class SyncordService {
   public CREATE_ISSUE_URL = this.baseUrl + "/createIssue";
   public PUBLISH_ISSUE_URL = "http://abcipl.club:10016/api/syncord/updateStatus";
   public CREATE_ORDER = this.baseUrl + '/createOrder';
+  public GET_MY_ORDERS = 'http://35.237.160.64:5000/hsbc';
   
   constructor() { }
 

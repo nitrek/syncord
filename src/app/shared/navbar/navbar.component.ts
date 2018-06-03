@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit{
     getTitle(){
         var titlee = window.location.pathname;
         titlee = titlee.substring(1);
-        console.log(titlee);
+        //console.log(titlee);
         for(var item = 0; item < this.listTitles.length; item++){
             if(this.listTitles[item].path === titlee){
                 return this.listTitles[item].title;

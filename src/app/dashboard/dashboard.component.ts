@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit{
           this.issuesList = responseText;
           console.log('Issues List ', this.issuesList);
 
-          console.log('Banker ' + this.service.getMyRole(this.issuesList[1].state.data.coBanker));
+          //console.log('Banker ' + this.service.getMyRole(this.issuesList[1].state.data.coBanker));
         },
         (error) => {
           console.log("Error in getting users list : " + error);

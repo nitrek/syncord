@@ -6,7 +6,7 @@
                     <div class="col-md-9">
                         <div class="header">
                             <h4 class="title">Orders</h4>
-                            <p class="category">Here is a subtitle for this table</p>
+                            <!--<p class="category">Here is a subtitle for this table</p>-->
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -14,7 +14,7 @@
                             <div class="checkbox">
                                     <input id="checkbox1" type="checkbox">
                                     <label for="checkbox1">
-                                            <p class="category">My Issues</p>
+                                            <!--<p class="category">My Issues</p>-->
                                     </label>
                                 </div>
 </div>
@@ -26,20 +26,20 @@
                             <tr>
                                 <th>Deal Name</th>
                                 <th>Investor</th>
-                                <th>Investor Type</th>
+                                <!--<th>Investor Type</th>-->
                                 <th>Book</th>
                                 <th>Amount</th>
                                 <th>Allocated</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let row of orderList">
-                                <td>{{row.dealName}}</td>
-                                <td>{{row.investor}}</td>
-                                <td>{{row.investorType}}</td>
-                                <td>{{row.book}}</td>
-                                <td>{{row.orderAmount}}</td>
-                                <td>{{row.allocatedAmount}}</td>
+                            <tr *ngFor="let row of issues">
+                                <td>{{row.state.data.issueName}}</td>
+                                <td>{{row.state.data.investorName}}</td>
+                                <!--<td>{{row.state.data.investorType}}</td>-->
+                                <td>{{row.state.data.book}}</td>
+                                <td>{{row.state.data.amount}}</td>
+                                <td>{{row.state.data.allocatedAmount}}</td>
                             </tr>
                         </tbody>
                     </table>

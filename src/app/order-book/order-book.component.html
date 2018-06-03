@@ -6,17 +6,17 @@
                     <div class="col-md-9">
                         <div class="header">
                             <h4 class="title">Orders</h4>
-                            <p class="category">Here is a subtitle for this table</p>
+                            <!--<p class="category">Here is a subtitle for this table</p>-->
                         </div>
                     </div>
                     <div class="col-md-3">
                             <div class="header" style="text-align: right">
-                            <div class="checkbox">
+                            <!--<div class="checkbox">
                                     <input id="checkbox1" type="checkbox">
                                     <label for="checkbox1">
                                             <p class="category">My Issues</p>
                                     </label>
-                                </div>
+                                </div>-->
 </div>
                         </div>
                 </div>
@@ -28,9 +28,9 @@
                                 <th>Investor</th>
                                 <th>Investor Type</th>
                                 <th>Book</th>
-                                <th>Amount</th>
-                                <th>Allocated</th>
-                                <th>Share</th>
+                                <th class="text-right">Amount</th>
+                                <th class="text-right">Allocated</th>
+                                <th class="text-center">Share</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,11 +39,13 @@
                                 <td>{{row.investor}}</td>
                                 <td>{{row.investorType}}</td>
                                 <td>{{row.book}}</td>
-                                <td>{{row.orderAmount}}</td>
-                                <td>{{row.allocatedAmount}}</td>
-                                <td>
+                                <td class="text-right">{{row.orderAmount}}</td>
+                                <td class="text-right">{{row.allocatedAmount}}</td>
+                                <td class="text-center">
+                                  <span *ngIf="!isOrderShared(row.orderID)">
                                     <button type="submit" class="btn btn-info btn-fill " 
                                     (click)="shareOrder(row)">Share</button>
+                                  </span>
                                   </td>
                             </tr>
                         </tbody>

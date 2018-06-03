@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+import { ActivatedRoute } from '@angular/router';
 import { SyncordService } from '../services/syncord-service.service';
 
 declare interface TableData {
@@ -19,10 +20,14 @@ export class SharedOrdersComponent implements OnInit {
   public tableData2: TableData;
 
   issuesIdMap = new Map();
+  selectedIssueName;
 
   orderList;
+  issues;
 
-  constructor(private http: Http, private service: SyncordService) { }
+  constructor(private http: Http, 
+              private service: SyncordService,
+              private route: ActivatedRoute,) { }
   ngOnInit() {
     this.headerNames = [
       'Deal Name',
@@ -56,8 +61,11 @@ export class SharedOrdersComponent implements OnInit {
 
     };
 
-    this.loadIssuesMap();
-    this.getMyOrders();
+    this.selectedIssueName = this.route.snapshot.paramMap.get('issuename');
+    console.log('Selected Issue' + this.selectedIssueName);
+
+    //this.loadIssuesMap();
+    //this.getMyOrders();
     this.loadSharedOrders();
   }
 
@@ -81,29 +89,7 @@ export class SharedOrdersComponent implements OnInit {
     )
   }
 
-  loadIssuesMap() {
-    const url = this.service.GET_ISSUES_URL;
-
-    this.http.get(url).subscribe(
-      (response) => {
-        console.log('Resp ', response);
-        let issues = response.json();
-
-        for (let issue of issues) {
-          console.log(issue);
-          this.issuesIdMap.set(issue.state.data.issueName, issue.state.data.linearId.id)
-        }
-        console.log('Issues Map ', this.issuesIdMap);
-      },
-      (error) => {
-        console.log("Error in getting users list : " + error);
-      },
-      () => {
-        //this.getLeaderBoardData();
-        //this.getMatchInfo();
-      }
-    )
-  }
+  
 
   loadSharedOrders() {
     const url = this.service.GET_ORDERS_URL;
@@ -111,13 +97,18 @@ export class SharedOrdersComponent implements OnInit {
     this.http.get(url).subscribe(
       (response) => {
         console.log('Orders ', response);
-        let issues = response.json();
+        let data = response.json();
+        console.log('Orders ', data);
 
+        console.log('Selected Name ' + this.selectedIssueName);
+        console.log('Issue Name ' + data[0].state.data.issueName);
+
+        this.issues = data.filter(issue => issue.state.data.issueName === this.selectedIssueName);
         // for(let issue of issues) {
         //   console.log(issue);
         //   this.issuesIdMap.set(issue.state.data.issueName, issue.state.data.linearId.id)
         // }
-        // console.log('Issues Map ', this.issuesIdMap);
+        console.log('Filtered issues ', this.issues);
       },
       (error) => {
         console.log("Error in getting orders list : " + error);

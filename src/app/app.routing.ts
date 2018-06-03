@@ -31,7 +31,7 @@ export const AppRoutes: Routes = [
         component: OrderBookComponent
     },
     {
-        path: 'sharedorders',
+        path: 'sharedorders/:issuename',
         component: SharedOrdersComponent
     },
     {

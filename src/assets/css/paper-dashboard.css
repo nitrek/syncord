@@ -364,12 +364,12 @@ hr {
 }
 .sidebar .logo-img,
 .off-canvas-sidebar .logo-img {
-  width: 42px;
-  max-height: 42px;
+  width: 62px;
+  max-height: 62px;
 }
 .sidebar .logo-img img,
 .off-canvas-sidebar .logo-img img {
-  width: 42px;
+  width: 62px;
   top: 16px;
   left: 18px;
   position: absolute;
