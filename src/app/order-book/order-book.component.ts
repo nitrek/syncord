@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { SyncordService } from '../services/syncord-service.service';
 
+declare var $:any;
+
 declare interface TableData {
   headerRow: string[];
   dataRows: string[][];
@@ -159,6 +161,8 @@ export class OrderBookComponent implements OnInit {
         (response) => {
           console.log('Share order status : ' + response);
           this.getMyOrders();
+          this.loadSharedOrders();
+          this.showNotification('top', 'right');
         },
         (error) => {
           console.log("Error in sharing ordere : " + error);
@@ -169,6 +173,24 @@ export class OrderBookComponent implements OnInit {
         }
       )
     }
+
+    showNotification(from, align){
+      var type = ['','info','success','warning','danger'];
+  
+      var color = '#8EF3C5';//Math.floor((Math.random() * 4) + 1);
+  
+    $.notify({
+        icon: "ti-announcement",
+        message: "Order shared successfully"
+      },{
+          type: type[color],
+          timer: 3000,
+          placement: {
+              from: from,
+              align: align
+          }
+      });
+  }
     }
 
 

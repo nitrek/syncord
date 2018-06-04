@@ -94,6 +94,7 @@ export class DashboardComponent implements OnInit{
         (response) => {
           console.log('Publish issue status : ' + response);
           this.getIssuesList();
+          this.showNotification('top', 'right');
         },
         (error) => {
           console.log("Error in creating issue : " + error);
@@ -108,4 +109,22 @@ export class DashboardComponent implements OnInit{
     openOrders() {
       console.log('Clicked');
     }
+
+    showNotification(from, align){
+      var type = ['','info','success','warning','danger'];
+  
+      var color = '#8EF3C5';//Math.floor((Math.random() * 4) + 1);
+  
+    $.notify({
+        icon: "ti-announcement",
+        message: "Deal published successfully"
+      },{
+          type: type[color],
+          timer: 3000,
+          placement: {
+              from: from,
+              align: align
+          }
+      });
+  }
 }
