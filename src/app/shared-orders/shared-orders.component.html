@@ -30,6 +30,7 @@
                                 <th>Book</th>
                                 <th>Amount</th>
                                 <th>Allocated</th>
+                                <th>Order Bank</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,6 +41,7 @@
                                 <td>{{row.state.data.book}}</td>
                                 <td>{{row.state.data.amount}}</td>
                                 <td>{{row.state.data.allocatedAmount}}</td>
+                                <td>{{row.state.data.borrower | x500ParserPipe}}</td>
                             </tr>
                         </tbody>
                     </table>
