@@ -10,7 +10,7 @@ import { NotificationsComponent }   from './notifications/notifications.componen
 import { UpgradeComponent }   from './upgrade/upgrade.component';
 import { CreateIssueComponent} from './create-issue/create-issue.component';
 import { OrderBookComponent } from './order-book/order-book.component';
-import {  SharedOrdersComponent } from './shared-orders/shared-orders.component';
+import { SharedOrdersComponent } from './shared-orders/shared-orders.component';
 
 export const AppRoutes: Routes = [
     {
