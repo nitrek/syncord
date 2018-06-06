@@ -5,16 +5,16 @@ export class SyncordService {
 
   currentBanker = "HSBC";
   userName = "Scott Tiger";
-  baseUrl = "http://abcipl.club:10013/api/syncord";
+  baseUrl = "http://ec2-52-76-64-110.ap-southeast-1.compute.amazonaws.com:10013/api/syncord";
 
 
   public GET_PEERS_URL = this.baseUrl + "/peers";
   public GET_ISSUES_URL = this.baseUrl + "/issues";
   public GET_ORDERS_URL = this.baseUrl + "/orders";
   public CREATE_ISSUE_URL = this.baseUrl + "/createIssue";
-  public PUBLISH_ISSUE_URL = "http://abcipl.club:10016/api/syncord/updateStatus";
+  public PUBLISH_ISSUE_URL = "http://ec2-52-76-64-110.ap-southeast-1.compute.amazonaws.com:10016/api/syncord/updateStatus";
   public CREATE_ORDER = this.baseUrl + '/createOrder';
-  public GET_MY_ORDERS = 'http://35.237.160.64:5000/hsbc';
+  public GET_MY_ORDERS = 'http://ec2-52-76-64-110.ap-southeast-1.compute.amazonaws.com:5000/hsbc';
   
   constructor() { }
 
