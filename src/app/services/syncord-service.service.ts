@@ -14,7 +14,7 @@ export class SyncordService {
   public CREATE_ISSUE_URL = this.baseUrl + "/createIssue";
   public PUBLISH_ISSUE_URL = "http://ec2-52-76-64-110.ap-southeast-1.compute.amazonaws.com:10016/api/syncord/updateStatus";
   public CREATE_ORDER = this.baseUrl + '/createOrder';
-  public GET_MY_ORDERS = 'http://ec2-52-76-64-110.ap-southeast-1.compute.amazonaws.com:5000/hsbc';
+  public GET_MY_ORDERS = 'http://ec2-52-76-64-110.ap-southeast-1.compute.amazonaws.com:5000/citi';
   
   constructor() { }
 
